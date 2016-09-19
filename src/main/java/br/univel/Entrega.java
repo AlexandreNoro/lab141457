@@ -11,7 +11,7 @@ public class Entrega implements Serializable {
 	 */
 	private static final long serialVersionUID = 3822326798234322557L;
 
-	private int id_entrega;
+	private Float id_entrega;
 	private String endereco;
 	private boolean entrega;
 	private String data_venda;
@@ -23,11 +23,11 @@ public class Entrega implements Serializable {
 
 	}
 
-	public int getId_entrega() {
+	public Float getId_entrega() {
 		return id_entrega;
 	}
 
-	public void setId_entrega(int id_entrega) {
+	public void setId_entrega(Float id_entrega) {
 		this.id_entrega = id_entrega;
 	}
 
