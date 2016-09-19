@@ -41,7 +41,7 @@ public class VendaWBS {
 			e.printStackTrace();
 		}
 
-		return "Concluído";
+		return "Concluído a operação";
 	}
 
 }

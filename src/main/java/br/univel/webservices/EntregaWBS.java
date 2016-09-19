@@ -42,7 +42,7 @@ public class EntregaWBS {
 
 			e.printStackTrace();
 		}
-		return "Concluído";
+		return "Concluído a operação";
 	}
 
 }
