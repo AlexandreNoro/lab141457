@@ -59,7 +59,7 @@ public class ServletConfig extends HttpServlet implements Serializable {
 				String text = "Esta Mensagem" + (i + 1);
 
 				Venda venda = new Venda();
-				venda.setId_venda(1);
+				venda.setId_venda((float) 1);
 				venda.setCpf_cliente("093.050.669.74");
 				venda.setItens(new ArrayList<String>());
 				venda.setVlrTotal(new BigDecimal(150.00));

@@ -11,16 +11,16 @@ public class Venda implements Serializable {
 	 */
 	private static final long serialVersionUID = -8052670432604566361L;
 
-	private int id_venda;
+	private Float id_venda;
 	private String cpf_cliente;
 	private List<String> itens;
 	private BigDecimal vlrTotal;
 
 
-	public int getId_venda() {
+	public Float getId_venda() {
 		return id_venda;
 	}
-	public void setId_venda(int id_venda) {
+	public void setId_venda(Float id_venda) {
 		this.id_venda = id_venda;
 	}
 	public String getCpf_cliente() {
