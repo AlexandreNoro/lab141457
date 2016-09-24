@@ -1,7 +1,8 @@
 package br.univel.webservices;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
@@ -9,39 +10,31 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
-import EJBS.ProcessVendaWBS;
+import EJBS.ProcessVenda;
 import br.univel.Venda;
 
 @WebService
 public class VendaWBS {
 
-	@EJB(name = "processVendaWBS")
-	private ProcessVendaWBS processVendaWBS;
+	@EJB
+	ProcessVenda ProcessVendaEJB;
 
-	@WebMethod(operationName = "venda")
-	@WebResult(name = "resultVenda")
+	@WebMethod(operationName = "vender")
+	@WebResult(name = "status_Venda")
+	public String doGet(@WebParam(name = "num_Nota") int num) {
+		Venda venda = new Venda();
+		venda.setId_venda(2);
 
-	public String venda(
+		ArrayList<String> itens = new ArrayList<>();
+		itens.add("1");
+		itens.add("2");
 
-			@WebParam(name = "id_venda") Float id_venda, @WebParam(name = "cpf_cliente") String cpf_cliente,
-			@WebParam(name = "itens") List<String> itens, @WebParam(name = "vlrTotal") BigDecimal vlrTotal) {
+		venda.setCpf_cliente("085.444.752.78");
+		venda.setData_venda(new Date(Calendar.DATE));
+		venda.setItens((java.util.List<String>) itens);
 
-		try {
+		ProcessVendaEJB.processarVenda(venda);
 
-			Venda venda = new Venda();
-			venda.setId_venda(id_venda);
-			venda.setCpf_cliente(cpf_cliente);
-			venda.setItens(itens);
-			venda.setVlrTotal(vlrTotal);
-
-			processVendaWBS.processarVenda(venda);
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-		return "Concluído a operação";
+		return "Venda Concluída";
 	}
-
 }

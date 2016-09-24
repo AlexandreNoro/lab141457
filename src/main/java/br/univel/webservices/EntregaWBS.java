@@ -1,7 +1,7 @@
 package br.univel.webservices;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.sql.Date;
+import java.util.Calendar;
 
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
@@ -9,40 +9,26 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
-import EJBS.ProcessEntregaWBS;
+import EJBS.ProcessEntrega;
 import br.univel.Entrega;
 
 @WebService
 public class EntregaWBS {
 
-	@EJB(name = "processEntregaWBS")
+	@EJB
+	ProcessEntrega ProcessEntregaEJB;
 
-	private ProcessEntregaWBS processEntregaWBS;
+	@WebMethod(operationName = "entregar")
+	@WebResult(name = "statusEntrega")
+	public String doGet(@WebParam(name = "enderecoEntrega") String endereco) {
 
-	@WebMethod(operationName = "entrega")
+		Entrega entrega = new Entrega();
+		entrega.setId_entrega(2);
+		entrega.setData_entrega(new Date(Calendar.DATE));
+		entrega.setEndereco(endereco);
 
-	@WebResult(name = "resultEntrega")
-
-	public String entrega(
-
-			@WebParam(name = "id_entrega") Float id_entrega, @WebParam(name = "endereco") String endereco,
-			@WebParam(name = "data_venda") String data_venda, @WebParam(name = "data_entrega") String data_entrega,
-			@WebParam(name = "itens") List<String> itens, @WebParam(name = "vlrTotal") BigDecimal vlrTotal) {
-		try {
-			Entrega entrega = new Entrega();
-			entrega.setId_entrega(id_entrega);
-			entrega.setEndereco(endereco);
-			entrega.setData_venda(data_venda);
-			entrega.setData_entrega(data_entrega);
-			entrega.setItens(itens);
-			entrega.setVlrTotal(vlrTotal);
-
-			processEntregaWBS.processarEntrega(entrega);
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-		return "Concluído a operação";
+		ProcessEntregaEJB.processarEntrega(entrega);
+		return "Entrega enviada";
 	}
 
 }
