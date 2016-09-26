@@ -19,8 +19,8 @@ public class EntregaWBS {
 	ProcessEntrega ProcessEntregaEJB;
 
 	@WebMethod(operationName = "entregar")
-	@WebResult(name = "statusEntrega")
-	public String doGet(@WebParam(name = "enderecoEntrega") String endereco) {
+	@WebResult(name = "status_Entrega")
+	public String doGet(@WebParam(name = "endereco_Entrega") String endereco) {
 
 		Entrega entrega = new Entrega();
 		entrega.setId_entrega(2);
